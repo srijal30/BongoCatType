@@ -6,7 +6,7 @@
 * Faiyaz Rafee
 
 ## Idea
-A typing game that can be played on terminal, and possibly on a GUI as well. Will be developed using java.
+A typing game that can be played on terminal, and possibly on a GUI as well. Will be developed using Java.
 
 ## Key Features
 
@@ -16,7 +16,7 @@ A typing game that can be played on terminal, and possibly on a GUI as well. Wil
 
 ## Versions
 
-#v0
+### v0
 * created GameManager which will handle game logic such as:
   * Creating WordList using set difficulty
   * Generating Scores (raw WPM, accuracy, real WPM)
