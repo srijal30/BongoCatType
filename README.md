@@ -13,5 +13,13 @@ A typing game that can be played on terminal, and possibly on a GUI as well. Wil
 
 ## Extra Features
 
+
+## Versions
+
 #v0
+* created GameManager which will handle game logic such as:
+  * Creating WordList using set difficulty
+  * Generating Scores (raw WPM, accuracy, real WPM)
+  * Keeping track of startTime
+  * Will be reusable
 
