@@ -8,6 +8,13 @@
 ## Idea
 A typing game that can be played on terminal, and possibly on a GUI as well. Will be developed using Java.
 
+
+## How to Launch
+```
+$javac Woo.java
+$java Woo
+```
+
 ## Key Features
 
 
