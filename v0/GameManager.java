@@ -5,42 +5,37 @@ import java.util.*;
 
 public class GameManager{
 
-    //word storage queues
+    //word storage "queues"
     private LinkedList<String> originalWords;
-    private LinkedList<String> userWords; //maybe we can implement a stack here
+    private LinkedList<String> userWords; 
 
     //store the start time
     private long startTime;
 
-
     //difficulty variables
-    private /*dont know what type yet*/ int difficulty; 
+    private int difficulty; 
     private int wordCount;
 
     //what should we put in our gameManager constructor?
-    public GameManager( int dif, int wC ){
-        difficulty = dif;
-        wordCount = wC;
-        //automatically setup a Game (we need to put this somewhere else)
-        newGame();
+    public GameManager(){
     }
 
 
     //SETTERS
-
     public void setDifficulty( int diff ){ difficulty = diff; }    
     public void setWordCount( int wC ){ wordCount = wC; }
+
+    //tmp (hopefully)
     public void setUserWords( LinkedList<String> words ){ userWords = words; }
 
     //GETTERS
-
+    //tmp (hopefully)
     public LinkedList<String> getWords(){ return originalWords; }
 
 
     //FUNCTIONAL
-    
     //returns the word list and starts the timer
-    public void start(){
+    public void startTimer(){
         startTime = System.nanoTime();
     }
    
@@ -68,33 +63,41 @@ public class GameManager{
     }
     //returns your rawWPM
     public double rawWPM(){
-        double minutes = ( System.nanoTime() - startTime ) / 60 / 1000000000l;
-        System.out.println( minutes );
-        return userWords.size() / minutes ;
+        double minutes = ( System.nanoTime() - startTime ) / 60.0 / 1000000000.0;
+        return userWords.size() / minutes;
     }
     //returns your accuracy as a percentage
     public double accuracy(){
-        return ( wordCount - mistakes() ) / wordCount;  
+        return ( wordCount - mistakes() ) / (double)wordCount;  
     }
-    //returns mistake counts (mistyped words)
+    //returns mistake counts (mistyped words) while preserving the queues
     public int mistakes(){
-        
-        //save this info
-        int wordsLeft = originalWords.size();
-        int mistake = 0;
-
-        //do stuff
-        while( !userWords.isEmpty() ){
-            String tmpWord = originalWords.removeFirst();
-            originalWords.addLast(tmpWord);
-            if( tmpWord != userWords.removeFirst() ) mistake++; 
-            wordsLeft--;
+        int count = 0;
+        int longest = Math.max( userWords.size(), originalWords.size() );
+        int shortest = Math.min( userWords.size(), originalWords.size() );
+        for( int i = 0; i < shortest; i++ ){
+            //check if the words dont match
+            if( !userWords.getFirst().equals( originalWords.getFirst() ) )
+                count++;
+            //add the word to the end
+            longest--;
+            userWords.addLast( userWords.removeFirst() );
+            originalWords.addLast( originalWords.removeFirst() );
         }
-
-        //other stuff
-        while( wordsLeft-- > 0 ) originalWords.addLast( originalWords.removeFirst() );
-        return mistake;
+        //find which one is shorter
+        LinkedList<String> longerOne;
+        boolean decrement = false;
+        if ( userWords.size() <= originalWords.size() ){ 
+            longerOne = originalWords;
+            decrement = true;} 
+        else 
+            longerOne = userWords;
+        //preserve the order of that one as well
+        while( longest > 0 ) {
+            if (decrement) count++;
+            longerOne.addLast( longerOne.removeFirst() );
+            longest--;
+        }
+        return count;
     }
-    
-
 }
