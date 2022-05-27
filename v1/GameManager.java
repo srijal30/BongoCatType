@@ -51,8 +51,7 @@ public class GameManager{
     public void generateWords(){
         //NOT IMPLEMENTED: for now simple words gen
         originalWords = new LinkedList<String>();
-        String[] tmpWords = new String[]{"hello", "world", "how", "are", "you", "doing"}; 
-        for( String word : tmpWords ) originalWords.add( word );
+        WordGenerator.generate( difficulty , wordCount , originalWords );
     }
 
     //SCORE CALCULATION

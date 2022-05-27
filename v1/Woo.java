@@ -10,10 +10,10 @@ public class Woo{
             WordGenerator.addWord( wordText.nextLine() );
         }
         //FOR TESTING IF IT WORKS
-        WordGenerator.printWords();
+        //WordGenerator.printWords();
 
         //start the terminal game
-        //TerminalGame game = new TerminalGame();
+        TerminalGame game = new TerminalGame();
 
         //start the processing game?!?!? how would this work
         //ProcessingGame game = new ProcessingGame();
