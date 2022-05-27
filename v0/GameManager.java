@@ -55,7 +55,6 @@ public class GameManager{
         for( String word : tmpWords ) originalWords.add( word );
     }
 
-
     //SCORE CALCULATION
     //returns your WPM taken into account with your accuracy
     public double realWPM(){

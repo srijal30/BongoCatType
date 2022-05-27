@@ -1,31 +1,14 @@
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.PriorityQueue;
+import java.util.ArrayList;
 
 public class WordGenerator{
 
+    private static ArrayList<String> words = new ArrayList<String>();
 
-    public static void main( String[] args ) throws FileNotFoundException {
-
-        Scanner reader = new Scanner( new File("message.txt") );
-        
-        String next = reader.nextLine();
-
-        while( reader.hasNext() ){
-            System.out.println( next );
-            next = reader.nextLine();
-        }
-
+    public static void addWord( String word ){
+        System.out.println( word );
+        words.add( word );
     }
 
 
 }
-
-class WordQueue extends PriorityQueue {
-
-    int difficulty;  
-
-}
-
 
