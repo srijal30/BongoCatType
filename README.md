@@ -1,38 +1,42 @@
-# TYPSPEEDSTERS
+TYPSPEEDSTERS present...
 
-## Roster
+# BongoCatType
+
+## Roster:
 * Salaj Rijal
 * Alif Rahman
 * Faiyaz Rafee
 
-## Idea
-A typing game that can be played on terminal, and possibly on a GUI as well. Will be developed using Java.
+## Proposal:
+A typing game that can be played on terminal. Will be developed using Java.
 
-
-## How to Launch
+## How to Launch:
 ```
 $javac Woo.java
 $java Woo
 ```
 
-## Key Features
+## Key Features:
 
 
-## Extra Features
+## Extra Features:
 
 
-## Versions
+## Version Log:
 
 ### v0
-* created repo + all necassary files (woo, readme, gitignore)
-* created GameManager which will handle game logic such as:
-  * Creating WordList using set difficulty
-  * Generating Scores (raw WPM, accuracy, real WPM)
-  * Keeping track of startTime
-  * Will be reusable
-* created TerminalGame which will start a TerminalGame instance
-* created stubs for some GameManager methods
-* started work on setup for TerminalGame
+* created repo + neccassary files
+* created structure for terminalGame
+  * GameManager -- in charge of gamelogic
+  * TerminalGame -- will start and maintain a simple Game in terminal
+* mostly finished GameManager and TerminalGame (except for word generation)
+
+### v1
+* implemented a word generator
+-- will add details later too lazy rn 😴😴😴😴 --
+
+<br>
+
 
 
 ██████╗░░█████╗░███╗░░██╗░██████╗░░█████╗░░█████╗░░█████╗░████████╗

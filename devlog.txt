@@ -21,13 +21,16 @@ UNRESOLVED ISSUES
    - We currently are setting on using a queue
 maybe some of these will move into the Obs.Ovrcm section...
 
+- How do you generate words based on difficulty inputted by user?
+
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - You can add l at the end of a number to assign it as a long.
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-we changed ___ to ___ bc...
+- we changed how userWords and originalWords will be stored
+- we changed how word generation wouldWork
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,8 +73,8 @@ Everyone :: Initialized necassary repo files and started devlog
 Everyone :: worked on GameManager and TerminalGame in class
 Faiyaz :: created TeamFlag, found word list online and added message.txt
 Alif and Salaj :: created propro
-Everyone :: continued work on TerminalGame, finished scoreCalculation and tested sample word gen
-Salaj :: fixed some bugs
+Everyone :: continued work on TerminalGame, finished scoreCalculation and tested with fixed word gen
+Salaj :: fixed some bugs and started work on v1 (wordGenerator)
 
 FOR FUTURE (NOT IMPLEMENTED):
 2022-05-25
