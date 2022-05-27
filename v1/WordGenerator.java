@@ -1,15 +1,28 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class WordGenerator{
   
-  private static ArrayList<String> words = new ArrayList<String>();
+  private static WordBST words = new WordBST();
+  private static int size = 0;
 
   public static void addWord( String word ){
-      System.out.println( word );
-      words.add( word );
+      words.insert( word );
+      size++;
+  }
+
+  public static void generate( LinkedList<String> queue ){
+
+  }
+
+  public static void fillQueue( TreeNode start, LinkedList<String> queue ){
+    
   }
 
 
+  //FOR TESTING
+  public static void printWords(){
+    System.out.println( words.inOrderTravStr() );
+  }
 }
 
 //taken from library and modified
@@ -45,6 +58,22 @@ class WordBST
       return;
     }
   }//end insert()
+
+  ///////FOR TESTING
+  public String inOrderTravStr(){
+    return inOrderTravStr( _root );
+  }
+  public String inOrderTravStr( TreeNode currNode ) {
+    String retStr = "";
+    if ( currNode == null )
+      return retStr;
+    retStr += inOrderTravStr( currNode.getLeft() );
+    retStr += " " + currNode.getValue() + "\n";
+    retStr += inOrderTravStr( currNode.getRight() );
+    return retStr;
+  }
+  ///////////////
+
 }//end class
 
 //also taken from library
