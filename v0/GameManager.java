@@ -5,19 +5,11 @@ import java.util.*;
 
 public class GameManager{
 
-    //word storage
+    //word storage queues
     private LinkedList<String> originalWords;
     private LinkedList<String> userWords; //maybe we can implement a stack here
-    /*
-    the way we would implement a stack is for when we want real time updates 
-    for WPM and stuff, that way we can have methods in the game manager to update the words
-    using by pushing to the userWords stack and then comparing to original words, its kinda
-    useless, but its fine
 
-    alternatively, we can use a queue, and have an option if the user wants 1 word at a time
-    */
-    
-    //storing the start time (in nanoseconds)
+    //store the start time
     private long startTime;
 
 
@@ -30,7 +22,7 @@ public class GameManager{
         difficulty = dif;
         wordCount = wC;
         //automatically setup a Game (we need to put this somewhere else)
-        newGame( false );
+        newGame();
     }
 
 
@@ -38,6 +30,11 @@ public class GameManager{
 
     public void setDifficulty( int diff ){ difficulty = diff; }    
     public void setWordCount( int wC ){ wordCount = wC; }
+    public void setUserWords( LinkedList<String> words ){ userWords = words; }
+
+    //GETTERS
+
+    public LinkedList<String> getWords(){ return originalWords; }
 
 
     //FUNCTIONAL
@@ -48,14 +45,11 @@ public class GameManager{
     }
    
     //prepares gameManager for a new game to be started w/ start()
-    public LinkedList<String> newGame( /*variable here for prompt repeition*/ boolean repeat){
+    public void newGame(){
         //clear old userWords
         userWords = new LinkedList<String>();
-        //create new word prompt
-        if ( !repeat ){
-            generateWords();
-        }
-        return originalWords;
+        //generate new words
+        generateWords();
     }
 
     //generate words according to difficulty
@@ -68,23 +62,39 @@ public class GameManager{
 
 
     //SCORE CALCULATION
-
     //returns your WPM taken into account with your accuracy
     public double realWPM(){
-        //NOT IMPLEMENTED
-        return 0.0;
+        return rawWPM() * accuracy();
     }
-
     //returns your rawWPM
     public double rawWPM(){
-        //NOT IMPLEMENTED
-        return 0.0;
+        double minutes = ( System.nanoTime() - startTime ) / 60 / 1000000000l;
+        System.out.println( minutes );
+        return userWords.size() / minutes ;
     }
-
     //returns your accuracy as a percentage
     public double accuracy(){
-        //NOT IMPLEMENTED
-        return 0.0;
+        return ( wordCount - mistakes() ) / wordCount;  
     }
+    //returns mistake counts (mistyped words)
+    public int mistakes(){
+        
+        //save this info
+        int wordsLeft = originalWords.size();
+        int mistake = 0;
+
+        //do stuff
+        while( !userWords.isEmpty() ){
+            String tmpWord = originalWords.removeFirst();
+            originalWords.addLast(tmpWord);
+            if( tmpWord != userWords.removeFirst() ) mistake++; 
+            wordsLeft--;
+        }
+
+        //other stuff
+        while( wordsLeft-- > 0 ) originalWords.addLast( originalWords.removeFirst() );
+        return mistake;
+    }
+    
 
 }

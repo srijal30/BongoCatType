@@ -13,16 +13,17 @@ A fun typing game in which you can assess your typing mastery through meaningful
 
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-wow we so BOSS bc...
+- GameManager will be a reusable object by the Game programs as a means of game logic.
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-blah blah pesky bug...
+- What datastructure should we use for userWords and originalWords?
+   - We currently are setting on using a queue
 maybe some of these will move into the Obs.Ovrcm section...
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-wow! oo!...
+- You can add l at the end of a number to assign it as a long.
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -64,22 +65,21 @@ tales of wisdom gained...
 --------------------------------------------------------------
 Everyone :: Initialized necassary repo files and started devlog
 
+2022-05-26
+--------------------------------------------------------------
+Faiyaz :: created TeamFlag, found word list online and added message.txt
+Alif and Salaj :: created propro
+Everyone :: worked on GameManager and TerminalGame in class
 
 
-FUTRE COPYPASTA:
-
+FOR FUTURE (NOT IMPLEMENTED):
 2022-05-25
 --------------------------------------------------------------
 Everyone :: Initialized necassary repo files and started devlog
-
 2022-05-25
 --------------------------------------------------------------
 Everyone :: Initialized necassary repo files and started devlog
-
 2022-05-25
 --------------------------------------------------------------
 Everyone :: Initialized necassary repo files and started devlog
-
-
 ==============================================================
-
