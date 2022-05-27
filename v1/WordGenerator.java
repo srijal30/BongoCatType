@@ -10,7 +10,8 @@ public class WordGenerator{
 
   public static void generate( int diff, int wC, LinkedList<String> queue ){
     //randomized starting position
-    int walkCount = (int) (Math.random() * words.height()*diff/5 + words.height()*(diff-1)/5); 
+    //int walkCount = (int) (Math.random() * words.height()*diff/5 + words.height()*(diff-1)/5); 
+    int walkCount = 100;
     //walk to that starting pos
     TreeNode walker = words.walk( walkCount );
     //now keep on walking (random steps) until queue is full
