@@ -86,6 +86,7 @@ Salaj :: fixed some bugs and started work on v1 (wordGenerator)
 Salaj :: worked on WordGenerator more, tried a BST but failed, ( also messed up the codebase :[ )
 Everyone :: worked to recover deleted files and decided on what datastructure and algorithm to use to generate words
 Faiyaz :: worked more on the team flag (which is confirmed to be epic)
+Salaj :: got WordGenerator to work
 
 FOR FUTURE (NOT IMPLEMENTED):
 2022-05-25

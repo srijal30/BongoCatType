@@ -13,7 +13,6 @@ public class GameManager{
     private long startTime;
 
     //difficulty variables
-    private int difficulty; 
     private int wordCount;
 
     //what should we put in our gameManager constructor?
@@ -22,7 +21,6 @@ public class GameManager{
 
 
     //SETTERS
-    public void setDifficulty( int diff ){ difficulty = diff; }    
     public void setWordCount( int wC ){ wordCount = wC; }
 
     //tmp (hopefully)
@@ -51,7 +49,7 @@ public class GameManager{
     public void generateWords(){
         //NOT IMPLEMENTED: for now simple words gen
         originalWords = new LinkedList<String>();
-        WordGenerator.generate( difficulty , wordCount , originalWords );
+        WordGenerator.generate( wordCount , originalWords );
     }
 
     //SCORE CALCULATION

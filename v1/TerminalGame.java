@@ -18,12 +18,12 @@ public class TerminalGame {
 
     //sets a game up (by getting difficulty and wordCount)
     public void setup(){
-        System.out.print("Select difficulty from 0 to 5: ");
-        manager.setDifficulty( input.nextInt() );
+        System.out.print("Select difficulty from 0 to 3: ");
+        WordGenerator.difficulty = input.nextInt() ;
 
         System.out.print("Select amount of words you would like the test to be: ");
         manager.setWordCount( input.nextInt() );
-        
+
         manager.newGame();
     }
 
@@ -35,7 +35,7 @@ public class TerminalGame {
             System.out.print( word + " ");
         }
 
-        System.out.println("\n\nBEGIN TYPING:\n");
+        System.out.println("\nBEGIN TYPING:\n");
         manager.startTimer(); //start the timer
         
         //idk why but scanner takes input for some reason
@@ -54,5 +54,4 @@ public class TerminalGame {
         System.out.println("REAL: " +  manager.realWPM() );
         System.out.println("ACC: " + manager.accuracy() * 100 + "%"  );
     }
-
 }
