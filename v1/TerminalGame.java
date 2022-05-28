@@ -35,11 +35,13 @@ public class TerminalGame {
             System.out.print( word + " ");
         }
 
-        System.out.println("\nBEGIN TYPING:\n");
+        System.out.println("\n\nPRESS ENTER WHEN YOU ARE READY");
+        input.nextLine();
+        input.nextLine();
+
+        System.out.println("\nBEGIN TYPING:");
         manager.startTimer(); //start the timer
         
-        //idk why but scanner takes input for some reason
-        input.nextLine();
         //tmporary setup to get the user input
         String[] userInput = input.nextLine().split(" ");
         LinkedList<String> temp = new LinkedList<String>();
