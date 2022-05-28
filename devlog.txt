@@ -14,18 +14,19 @@ A fun typing game in which you can assess your typing mastery through meaningful
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - GameManager will be a reusable object by the Game programs as a means of game logic.
+- We will use LinkedLists (which will act like queues) for userWords and originalWords
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- What datastructure should we use for userWords and originalWords?
-   - We currently are setting on using a queue
-maybe some of these will move into the Obs.Ovrcm section...
-
 - How do you generate words based on difficulty inputted by user?
+- What datastructure should we use to store words?
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - You can add l at the end of a number to assign it as a long.
+- git log to see commit log, git reset ~hash~ to restore to previous commit, git push -f to 
+force push commits to github
+- you can visualize your commits with gitk
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,6 +35,10 @@ MID-DEVELOPMENT DESIGN CHANGES
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-do not blindly add, commit, and push to ur repo
+-do not start coding a feature that you havent fully fleshed out yet
+-test incrementally to see if a feature is working before you add it to the rest of your codebase
+
 tales of wisdom gained...
 
 ||||||||||||||||||||||||||||||||||||||||||
@@ -75,6 +80,12 @@ Faiyaz :: created TeamFlag, found word list online and added message.txt
 Alif and Salaj :: created propro
 Everyone :: continued work on TerminalGame, finished scoreCalculation and tested with fixed word gen
 Salaj :: fixed some bugs and started work on v1 (wordGenerator)
+
+2022-05-27
+--------------------------------------------------------------------
+Salaj :: worked on WordGenerator more, tried a BST but failed, ( also messed up the codebase :[ )
+Everyone :: worked to recover deleted files and decided on what datastructure and algorithm to use to generate words
+Faiyaz :: worked more on the team flag (which is confirmed to be epic)
 
 FOR FUTURE (NOT IMPLEMENTED):
 2022-05-25
