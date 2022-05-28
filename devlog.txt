@@ -20,6 +20,7 @@ UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - How do you generate words based on difficulty inputted by user?
 - What datastructure should we use to store words?
+- Should our WordGenerator implememnt public and static variables? Is it bad practice?
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -27,6 +28,7 @@ COOL STUFF LEARNED
 - git log to see commit log, git reset ~hash~ to restore to previous commit, git push -f to 
 force push commits to github
 - you can visualize your commits with gitk
+- Java has built in sort and shuffle. For sort, you can implement Comparable to create a custom sort
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

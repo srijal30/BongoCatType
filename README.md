@@ -32,7 +32,9 @@ $java Woo
 * mostly finished GameManager and TerminalGame (except for word generation)
 
 ### v1
-* implemented a word generator
+* implemented a WordGenerator which will generate words dependent on difficulty
+* made the WordGenerator highly customizable in the sense that in the future we can easily decide what makes a word difficult. For now we decided on length.
+
 -- will add details later too lazy rn 😴😴😴😴 --
 
 
