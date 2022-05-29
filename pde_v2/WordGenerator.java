@@ -1,5 +1,5 @@
 import java.util.LinkedList;
-import java.util.*;
+import java.util.Collections;
 
 public class WordGenerator{
   public static LinkedList<Word> wordList = new LinkedList<Word>();
@@ -29,7 +29,6 @@ public class WordGenerator{
       queue.addLast( wordList.get(i).getValue() );
     }
   }
-  
 }
 
 //IN THE FUTURE FIX THE DIFF CALCULATOR AND MAKE IT ABOUT SOMETHIGN OTHER THAN LENGTH
