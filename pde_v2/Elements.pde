@@ -19,9 +19,6 @@ class Label extends Element{
     super(x,y);
     this.size = size; this.text = text;
   }
-  void process(){
-    super.process();
-  }
   void draw(){
     super.draw();
     textAlign(CENTER);
@@ -49,9 +46,18 @@ class Button extends Label{
     //color is standard
     if( !onButton ) current = STANDARD;
     //if there is nextPage, go to it. Else print no connection
-    else if( mousePressed ){ if( nextPage == null ){ println("NO PAGE CONNECTED"); return; } currentPage = nextPage; currentPage.setup(); mousePressed = false; }
+    else if( mousePressed ) onClick();
     //mouse is hovering over button
     else current = HOVER;
+  }
+  //what happens when clicked
+  void onClick(){ 
+    if( nextPage == null ) println("NO PAGE CONNECTED"); 
+    else{
+      currentPage = nextPage; 
+      currentPage.setup(); 
+      mousePressed = false;
+    }
   }
   void draw(){
     rectMode(CENTER);
@@ -82,5 +88,48 @@ class Animation extends Element{
   void draw(){
     super.draw();
     image( frames[currentFrame], x, y );
+  }
+}
+
+//for textboxes with a fixed width
+class TextBox extends Label{
+  int width;
+  TextBox( float x, float y, float size, String text, int width){
+    super( x, y, size, text);
+    //add newlines to the text according to width guidlines
+    String result = "";
+    String current = "";
+    for( char c : text.toCharArray() ){
+      if( textWidth(current) > width ){result += current + "\n"; current = "";}
+      current += c;
+    }
+    result += current;
+    super.text = result;
+  }
+}
+
+//for user input
+class InputBox extends Button{
+  boolean selected;
+  InputBox(float x, float y, float size, String text, float w, float h){
+    super(x, y, size, text, w, h, null);
+    selected = false;
+  }
+  //process
+  void process(){
+    super.process();
+    if( selected ){
+      if( keyPressed ){
+        if( key == ENTER ) selected = false;
+        else if (key == BACKSPACE && !super.text.equals("")) super.text = super.text.substring(0, super.text.length()-1 );
+        else if ( Character.isLetterOrDigit(key) ) super.text += key;
+        keyPressed = false;
+      }
+    } 
+  }
+  //override the onClick
+  void onClick(){
+    super.text = "";
+    selected = true;
   }
 }
