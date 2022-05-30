@@ -1,81 +1,63 @@
 import java.util.ArrayList;
 
-interface Page {
-
-  //to process keypresses and clicks
-  void process( boolean clickEvent );
-  
-  //to draw the page
-  void draw();
-  
-}
-
-
-class Home implements Page {
-  Button[] buttons;
-  Label[] labels;
-  Home(){
-    buttons = new Button[]{
-      //button to go to Game Page
-      new Button( width/2, height/2, 100, 30, "About", ABOUT ),
-      //button for About Page
-    };  
-    labels = new Label[]{
-    };
+class Page {
+  ArrayList<Element> elements;
+  Page(){
+    elements = new ArrayList<Element>();
   }
-  void process( boolean clickEvent ){
-    for( Button b: buttons ) b.process( clickEvent ); // false cuz no click event
-    for( Label l: labels ) l.process();
+  void setup(){}
+  void process(){
+    for( Element e: elements ) e.process();
   }
   void draw(){
-    //draw the elements
-    for( Button b: buttons ) b.draw();
-    for( Label l: labels ) l.draw();
+    for( Element e: elements ) e.draw();
   }
 }
 
-
-class Game implements Page {
-  Button[] buttons;
-  Label[] labels;
-  Game(){
-    buttons = new Button[]{
-      //button to go to Home Page
-      new Button( width/2, height/2+150, 100, 50, "Go Home", HOME ),
-    };  
-    labels = new Label[]{
-    };
-  }
-  void process( boolean clickEvent ){
-    for( Button b: buttons ) b.process( clickEvent ); // false cuz no click event
-    for( Label l: labels ) l.process();
-  }
-  void draw(){
-    //draw the elements
-    for( Button b: buttons ) b.draw();
-    for( Label l: labels ) l.draw();
+class Home extends Page {
+  void setup(){
+    //BONGOCAT ANIMATION
+    elements.add(
+      new Animation(width/2-290, height/2+10,
+        new PImage[]{ loadImage("handsup.png"), loadImage("handsdown.png") }
+      )
+    );
+    //TITLE LABEL
+    elements.add( 
+      new Label( width/2, height/2-225, 100, "BongoCatType" )
+    );
+    //ABOUT PAGE BUTTON
+    elements.add(
+      new Button( width/2, height/2-25, 15, "About", 100, 30, new About() )
+    );
+    //GAME PAGE BUTTON
+    elements.add(
+      new Button( width/2, height/2-75, 15, "Play", 100, 30, new Game() )
+    );
   }
 }
 
-class About implements Page {
-  Button[] buttons;
-  Label[] labels;
-  About(){
-    buttons = new Button[]{
-      //button to go to Home Page
-      new Button( width/2, height/2, 100, 50, "Go Home", HOME ),
-    };  
-    labels = new Label[]{
-      new Label( width/2, height/2-80, 30, "About Page"),
-    };
+class Game extends Page {
+  void setup(){
+    
+
+
   }
-  void process( boolean clickEvent ){
-    for( Button b: buttons ) b.process( clickEvent ); // false cuz no click event
-    for( Label l: labels ) l.process();
-  }
-  void draw(){
-    //draw the elements
-    for( Button b: buttons ) b.draw();
-    for( Label l: labels ) l.draw();
+}
+
+class About extends Page {
+  void setup(){
+    
+    //ABOUT PAGE HEADER
+    elements.add( 
+      new Label( width/2, height/2-200, 100, "ABOUT" )
+    );
+
+    //HOME PAGE BUTTON
+    elements.add(
+      new Button( width/2, height/2-25, 15, "Home", 100, 30, new Home() )
+    );
+
+
   }
 }
