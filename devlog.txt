@@ -90,6 +90,18 @@ Everyone :: worked to recover deleted files and decided on what datastructure an
 Faiyaz :: worked more on the team flag (which is confirmed to be epic)
 Salaj :: got WordGenerator to work
 
+2022-05-30
+--------------------------------------------------------------------
+Everyone :: created 
+Salaj :: created a Page/Element framework for the processing game
+Faiayz :: worked on processing animations (which are looking epic)
+
+2022-05-31
+--------------------------------------------------------------------
+Everyone :: discussed new approach to finding WPM that is based on characters and not words
+Everyone :: created a flowchart of the game afterschool 
+Alif :: updated the .gitignore and UML and flowchart
+
 FOR FUTURE (NOT IMPLEMENTED):
 2022-05-25
 --------------------------------------------------------------
