@@ -79,3 +79,11 @@ class About extends Page {
 
   }
 }
+
+class Settings extends Page{
+  void setup(){
+    elements.add(
+      new Label(width/2, 100, 100, "Settings")
+    );
+  }
+}
