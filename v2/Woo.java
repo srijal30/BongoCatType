@@ -14,7 +14,7 @@ public class Woo{
         //System.out.println( WordGenerator.generate(10) );
 
         //start the terminal game
-        //TerminalGame game = new TerminalGame();
+        TerminalGame game = new TerminalGame();
 
         //start the processing game?!?!? how would this work (NOTE SEPERATE FILE)
         //ProcessingGame game = new ProcessingGame();

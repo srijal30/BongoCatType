@@ -6,7 +6,6 @@ public class GameManager {
     private String text;
     
     private long startTime;
-    private int latestUpdate; //stores the index of the latest update
     private int mistakes;
     
     private double rawWPM;
@@ -19,7 +18,7 @@ public class GameManager {
     public String getText(){ return text; }
 
     public GameManager(){ //we technically dont need this
-        rawWPM = realWPM = accuracy = mistakes = latestUpdate = 0;
+        rawWPM = realWPM = accuracy = mistakes = 0;
         inputQ = new LinkedList<>();
         realQ = new LinkedList<>();
     }
@@ -27,7 +26,7 @@ public class GameManager {
     //in the future allow repeats of texts (maybe store previous texts somewhere)
     public void newGame( int wordCount ){
         //reset vals of old game
-        rawWPM = realWPM = accuracy = mistakes = latestUpdate = 0;
+        rawWPM = realWPM = accuracy = mistakes = 0;
         inputQ = new LinkedList<>();
         realQ = new LinkedList<>();
         //generate new words
@@ -52,7 +51,6 @@ public class GameManager {
     public boolean removeCharacter(){
         if( inputQ.isEmpty() ) return false;
         inputQ.removeLast();
-        latestUpdate--; //we also want to update again
         return true;
     }
     //updates all the stats (realWPM, accuracy, and rawWPM)
@@ -65,18 +63,18 @@ public class GameManager {
         //calc the raw
         rawWPM = (inputQ.size() / 5.0) / timePassed;
         //loop through the new chars, finding mistakes
-        for( ; latestUpdate < inputQ.size(); latestUpdate++ ){
+        for( int i = 0; i < inputQ.size(); i++ ){
             //if inputQ size surpasses realQ size, then always a mistake
-            if( latestUpdate >= realQ.size() ){
+            if( i >= realQ.size() ){
                 mistakes++;
             }
             //if they dont match, also incremement
-            if( !inputQ.get( latestUpdate ).equals( realQ.get( latestUpdate ) ) ){
+            if( !inputQ.get( i ).equals( realQ.get( i ) ) ){
                 mistakes++;
             }
         }
         //calc real and accuracy
-        realWPM = ((inputQ.size() - mistakes)/ 5.0) / timePassed;
+        realWPM =  ((inputQ.size() - mistakes)/ 5.0) / timePassed;
         accuracy = (inputQ.size() - mistakes) / inputQ.size();
     }
 }

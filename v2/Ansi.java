@@ -12,7 +12,7 @@ public class Ansi
   private static final int MAGENTA = 35;
   private static final int CYAN = 36;
   private static final int WHITE = 37;
-  private static final String CLEAR_SCREEN =  "\033[2J";
+  public static final String CLEAR_SCREEN =  "\033[2J";
   private static final String HIDE_CURSOR =  "\033[?25l";
   private static final String SHOW_CURSOR =  "\033[?25h";
   //use this to go back to normal terminal colors
