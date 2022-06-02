@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.LinkedList;
+import java.awt.event.KeyListener;
+
 
 //create methods to get valid input (INPUT HANDLERS)
 
@@ -20,11 +22,8 @@ public class TerminalGame {
     public void setup(){
         System.out.print("Select difficulty from 0 to 3: ");
         WordGenerator.difficulty = input.nextInt() ;
-
         System.out.print("Select amount of words you would like the test to be: ");
-        manager.setWordCount( input.nextInt() );
-
-        manager.newGame();
+        manager.newGame( input.nextInt() );
     }
 
     public void startGame(){
