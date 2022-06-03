@@ -8,18 +8,19 @@ import java.util.LinkedList;
 public class TerminalGame {
     private KeyEventHandler keys;
     private GameManager manager;
-    private Scanner input; 
-    private boolean started = false;
+    private Scanner input;
+    private boolean started; 
     private LinkedList<Boolean> colors;
+    private int frameCount;
     //Start a Game on Construction 
     public TerminalGame(){
+        frameCount = 0;
         input = new Scanner( System.in );
         manager = new GameManager();
         keys = new KeyEventHandler(this);
         setup();
         //start the game (maybe make seperate method)
-        started = true;
-        updateScreen();
+        startGame();
     }
     //sets a game up (by getting difficulty and wordCount)
     public void setup(){
@@ -30,11 +31,31 @@ public class TerminalGame {
         System.out.print("Select amount of words you would like the test to be: ");
         manager.newGame( input.nextInt() );
     }
-    //update the screen aka the frame
-    public void updateScreen(){
+    public void startGame(){
+        started = true;
+        updateScreen();
+        manager.startTimer();
+    }
+    public void endGame(){
+        started = false;
         System.out.println(Ansi.CLEAR_SCREEN + Ansi.RESET);
         System.out.println("\033[" + 1 + ";" + 1 + "H");
-        System.out.println( "STATS: " + manager.getRawWPM() + "\t" + manager.getRealWPM() + "\t" + manager.getAccuracy() + "\n" );
+        System.out.println( "YOU FINISHED THE GAME!\n\nYOUR STATS:\nReal WPM: " + manager.getRealWPM() + "\nRaw WPM: " + manager.getRawWPM() + "\nAccuracy: " + (manager.getAccuracy() *100 ) + "%");
+        System.out.println("Play again? (Y/N)");
+        input = new Scanner( System.in );
+        String test = input.nextLine();
+        System.out.println( test );
+        if ( test.equals("Y") ) {
+            setup();
+            startGame();
+        }
+    }
+    //update the screen aka the frame
+    public void updateScreen(){
+        frameCount++;
+        System.out.println(Ansi.CLEAR_SCREEN + Ansi.RESET);
+        System.out.println("\033[" + 1 + ";" + 1 + "H");
+        System.out.println( "STATS: " + manager.getRawWPM() + "\t" + manager.getRealWPM() + "\t" + (manager.getAccuracy()*100) + "%\n" );
         //print out the colors
         String tmp = manager.getInput();
         for( int i = 0; i < tmp.length(); i++ ){
@@ -44,11 +65,17 @@ public class TerminalGame {
             }
             //red
             else{
-                System.out.print( Ansi.color(Ansi.RED,Ansi.background(Ansi.BLACK))+tmp.charAt(i));
+                if( tmp.charAt(i) == ' '){
+                    System.out.print( Ansi.color( Ansi.RED, Ansi.background(Ansi.RED))+tmp.charAt(i));
+                }
+                else{
+                    System.out.print( Ansi.color(Ansi.RED,Ansi.background(Ansi.BLACK))+tmp.charAt(i));
+                }
             }
         }
         System.out.println( Ansi.RESET + manager.getText( tmp.length() ) + "\n" );
         System.out.println( Ansi.RESET );
+        animation();
     }
     //register keyboard input
     public void registerEvent( KeyEvent e ){
@@ -61,8 +88,30 @@ public class TerminalGame {
         else{
             colors.add( manager.pushCharacter( e.getKeyChar() ) );
         }
-        manager.update();
-        updateScreen();
+        if( manager.update()) endGame();
+        else updateScreen();
+    }
+    public void animation(){
+        if( frameCount % 2 == 0){
+            System.out.println("       ⠀⠀⠀⢠⣿⣶⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+            System.out.println("⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣦⣄⣀⡀⣠⣾⡇⠀⠀⠀⠀");
+            System.out.println("⠀⠀⠀⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀");
+            System.out.println("⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⢿⣿⣿⡇⠀⠀⠀⠀");
+            System.out.println("⣶⣿⣦⣜⣿⣿⣿⡟⠻⣿⣿⣿⣿⣿⣿⣿⡿⢿⡏⣴⣺⣦⣙⣿⣷⣄⠀⠀⠀");
+            System.out.println("⣯⡇⣻⣿⣿⣿⣿⣷⣾⣿⣬⣥⣭⣽⣿⣿⣧⣼⡇⣯⣇⣹⣿⣿⣿⣿⣧⠀⠀");
+            System.out.println("⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠸⣿⣿⣿⣿⣿⣿⣿⣷⠀");
+        }
+        else{
+            System.out.println("           ⣰⣷⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+            System.out.println("⠀⠀⠀⠀⠀⠀⠀⣀⣶⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣦⣀⡀⠀⢀⣴⣇⠀⠀⠀⠀");
+            System.out.println("⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀");
+            System.out.println("⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀");
+            System.out.println("⠀⠀⠀⣴⣿⣿⣿⣿⠛⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿⣿⣿⣿⣿⣿⣿⣿⣄⠀⠀⠀");
+            System.out.println("⠀⠀⣾⣿⣿⣿⣿⣿⣶⣿⣯⣭⣬⣉⣽⣿⣿⣄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀");
+            System.out.println("⠀⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄");
+            System.out.println("⢸⣿⣿⣿⣿⠟⠋⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠁⣿⣿⣿⣿⡿⠛⠉⠉⠉⠉⠁");
+            System.out.println("⠘⠛⠛⠛⠀⠀⠀");
+        }
     }
 }
 //This is really scuffed

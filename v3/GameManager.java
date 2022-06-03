@@ -62,12 +62,15 @@ public class GameManager {
     }
     //updates all the stats (realWPM, accuracy, and rawWPM)
     //up to the game instance how often they call this function
-    public void update(){
+    //if returns true, the game is over
+    public boolean update(){
+        if( inputQ.size() > textQ.size() ){
+            return true;
+        }
         //if not possible to update then ignore this call
-        if( inputQ.isEmpty() ) return;
-        double timePassed = ( System.nanoTime() - startTime ) / 60000000000.0; //in minutess
+        if( inputQ.isEmpty() ) return false;
+        double timePassed = ( System.nanoTime() - startTime ) / 60.0 / 1000000000.0 ; //in minutess
         //calc the raw
-        System.out.println( inputQ.size() + " " + timePassed );
         rawWPM = (inputQ.size() / 5.0) / timePassed;
         //loop through the new chars, finding mistakes
         int mistakes = 0;
@@ -84,5 +87,6 @@ public class GameManager {
         //calc real and accuracy
         realWPM =  ((inputQ.size() - mistakes)/ 5.0) / timePassed;
         accuracy = (inputQ.size() - mistakes) / (double)inputQ.size();
+        return false;
     }
 }
