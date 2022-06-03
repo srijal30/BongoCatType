@@ -102,6 +102,13 @@ Everyone :: discussed new approach to finding WPM that is based on characters an
 Everyone :: created a flowchart of the game afterschool 
 Alif :: updated the .gitignore and UML and flowchart
 
+2022-06-02
+-----------------------------------------------------------------------
+Salaj & Alif :: in class changed GameManager to utilize characters instead of words
+Salaj :: updated how TerminalGame works to work with new GameManager. Also attempted
+continous input from terminal.
+
+
 FOR FUTURE (NOT IMPLEMENTED):
 2022-05-25
 --------------------------------------------------------------
