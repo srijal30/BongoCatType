@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
+import java.util.LinkedList;
 
 //create methods to get valid input (INPUT HANDLERS)
 public class TerminalGame {
@@ -9,59 +10,59 @@ public class TerminalGame {
     private GameManager manager;
     private Scanner input; 
     private boolean started = false;
-    private String userText;
+    private LinkedList<Boolean> colors;
     //Start a Game on Construction 
     public TerminalGame(){
         input = new Scanner( System.in );
         manager = new GameManager();
         keys = new KeyEventHandler(this);
         setup();
-        playGame();
+        //start the game (maybe make seperate method)
+        started = true;
+        updateScreen();
     }
     //sets a game up (by getting difficulty and wordCount)
     public void setup(){
-        userText = "";
+        //clear the old values
+        colors = new LinkedList<>();
         System.out.print("Select difficulty from 0 to 3: ");
         WordGenerator.difficulty = input.nextInt() ;
         System.out.print("Select amount of words you would like the test to be: ");
         manager.newGame( input.nextInt() );
     }
-    //plays game from start to finish
-    public void playGame(){
-        started = true;
-        while( true ){
-            clear();
-            System.out.println( "STATS: " + manager.getRawWPM() + "\t" + manager.getRealWPM() + "\t" + manager.getAccuracy() + "\n" );
-            System.out.println( manager.getText() + "\n" );
-            System.out.println( userText );
-            Ansi.wait( 1000 );
+    //update the screen aka the frame
+    public void updateScreen(){
+        System.out.println(Ansi.CLEAR_SCREEN + Ansi.RESET);
+        System.out.println("\033[" + 1 + ";" + 1 + "H");
+        System.out.println( "STATS: " + manager.getRawWPM() + "\t" + manager.getRealWPM() + "\t" + manager.getAccuracy() + "\n" );
+        //print out the colors
+        String tmp = manager.getInput();
+        for( int i = 0; i < tmp.length(); i++ ){
+            //green
+            if( colors.get(i) ){
+                System.out.print( Ansi.color(Ansi.GREEN,Ansi.background(Ansi.BLACK))+tmp.charAt(i));
+            }
+            //red
+            else{
+                System.out.print( Ansi.color(Ansi.RED,Ansi.background(Ansi.BLACK))+tmp.charAt(i));
+            }
         }
+        System.out.println( Ansi.RESET + manager.getText( tmp.length() ) + "\n" );
+        System.out.println( Ansi.RESET );
     }
+    //register keyboard input
     public void registerEvent( KeyEvent e ){
         if( !started ) return;
         //if backspace
         if( e.getKeyCode() == 8 ){
-            if( manager.removeCharacter() ){
-                userText = userText.substring(0, userText.length()-2);
-            };
+            if( manager.removeCharacter() ) colors.removeLast();
         }
+        //if any other character
         else{
-            boolean correct = manager.pushCharacter( e.getKeyChar() );
-            if( correct ){
-                userText += Ansi.color(Ansi.GREEN,Ansi.background(Ansi.BLACK))+e.getKeyChar();
-            }
-            else{
-                userText += Ansi.color(Ansi.RED,Ansi.background(Ansi.BLACK))+e.getKeyChar();
-            }
-            manager.update();
+            colors.add( manager.pushCharacter( e.getKeyChar() ) );
         }
-    }
-    private static void clear()
-    // Inspired from TerminallyIll.java
-    // Clears the screen and makes the cursor move to the top left of the terminal
-    {
-      System.out.println(Ansi.CLEAR_SCREEN + Ansi.RESET);
-      System.out.println("\033[" + 1 + ";" + 1 + "H");
+        manager.update();
+        updateScreen();
     }
 }
 //This is really scuffed

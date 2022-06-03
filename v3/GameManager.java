@@ -14,10 +14,9 @@ public class GameManager {
     public double getRawWPM(){ return rawWPM; }
     public double getRealWPM(){ return realWPM; }
     public double getAccuracy(){ return accuracy; }
-    
-    public String getText(){
+    public String getText( int start ){
         String result = "";
-        for( char c : textQ ) result += c;
+        for( int i = start; i < textQ.size(); i++ ) result += textQ.get(i);
         return result;
     }
     public String getInput(){
