@@ -114,6 +114,11 @@ Salaj :: Made the TerminalGame "gui" nicer looking. A lot of bugs were squashed 
 one where score not calculating properly.
 Salaj & Alif :: Made the score calculation accurate and also added a cute animation in the Terminal Game. We are getting closer to starting our next version (in processing!).
 
+2022-06-05
+--------------------------------------------------------------------------------
+Salaj :: Added Leaderboard.java and got Global Leaderboard and Local Leaderboard working
+
+
 FOR FUTURE (NOT IMPLEMENTED):
 2022-05-25
 --------------------------------------------------------------
