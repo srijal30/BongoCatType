@@ -51,16 +51,19 @@ $java Woo
 ### v2
 * modified GameManager to be character based to improve score calculation
 * TerminalGame now takes in continuous input
+* new responsive UI for TerminalGame
 
 ### v3
-* TerminalGame continous input bugs squashed
-* TerminalGame now has a feautre in which player can repeat playing the game
+* TerminalGame continous input is smoother 
+* improved TerminalGame UI
 * Refactored and improved the code throughout all the files
 
 ### v4
-* added a Leaderboard class that reads and writes to a local.csv file (which will hold local leaderboard rankings) 
+* squashed bug where program didnt close if user didnt want to play again
+* added a Leaderboard class that maintains a global and local leaderboard 
+* user can now choose to add their entry to leaderboards and check the leaderboards after finishing a game
 
-
+### v5
 
 <br>
 ██████╗░░█████╗░███╗░░██╗░██████╗░░█████╗░░█████╗░░█████╗░████████╗

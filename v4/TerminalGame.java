@@ -68,11 +68,11 @@ public class TerminalGame {
             choice = input.nextLine();
             if( choice.equals("L") ){
                 int counter = 1;
-                for( Entry e: Leaderboard.localLeaderboard() ) System.out.printf("%d: %s\t%3.2f\t%3.2f%%\t%3.2f\n", counter++, e.getName(), e.realWPM(), e.accuracy(), e.rawWPM() );
+                for( Entry e: Leaderboard.localLeaderboard() ) System.out.printf("%d: %s\t\t%3.2f\t\t%3.2f%%\t\t%3.2f\n", counter++, e.getName(), e.realWPM(), e.accuracy()*100, e.rawWPM() );
             }
             else{
                 int counter = 1;
-                for( Entry e: Leaderboard.globalLeaderboard() ) System.out.printf("%d: %s\t%3.2f\t%3.2f%%\t%3.2f\n", counter++, e.getName(), e.realWPM(), e.accuracy(), e.rawWPM() );
+                for( Entry e: Leaderboard.globalLeaderboard() ) System.out.printf("%d: %s\t\t%3.2f\t\t%3.2f%%\t\t%3.2f\n", counter++, e.getName(), e.realWPM(), e.accuracy()*100, e.rawWPM() );
             }
         }
         
