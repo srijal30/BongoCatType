@@ -13,7 +13,7 @@ public class GameManager {
     public double getRawWPM(){ return rawWPM; }
     public double getRealWPM(){ return realWPM; }
     public double getAccuracy(){ return accuracy; }
-    public String getText( int start ){
+    public String getText( int start ){ //get the real words starting from specific index
         String result = "";
         for( int i = start; i < textQ.size(); i++ ) result += textQ.get(i);
         return result;
@@ -25,9 +25,6 @@ public class GameManager {
     }
 
     public GameManager(){ //we technically dont need this
-        rawWPM = realWPM = accuracy = 0;
-        inputQ = new LinkedList<>();
-        textQ = new LinkedList<>();
     }
     //creates new text based on wordCount
     //in the future allow repeats of texts (maybe store previous texts somewhere)

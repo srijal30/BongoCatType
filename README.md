@@ -11,10 +11,23 @@ TYPSPEEDSTERS present...
 A typing game that can be played on terminal. Will be developed using Java.
 
 ## How to Launch:
+
+### Terminal Version
+1. clone the repo
+2. install java
+3. run the following commands in your terminal:
 ```
 $javac Woo.java
 $java Woo
 ```
+
+### Processing Version
+1. download processing
+2. open processing.exe
+3. clone the repo
+4. open the path to the cloned repo in the processing application
+5. press run
+
 
 ## Key Features:
 

@@ -6,12 +6,15 @@ import java.util.LinkedList;
 
 //create methods to get valid input (INPUT HANDLERS)
 public class TerminalGame {
-    private KeyEventHandler keys;
-    private GameManager manager;
     private Scanner input;
-    private boolean started; 
-    private LinkedList<Boolean> colors;
     private int frameCount;
+    
+    private GameManager manager;
+    private LinkedList<Boolean> colors;
+    
+    private boolean started; 
+    private KeyEventHandler keys;
+    
     //Start a Game on Construction 
     public TerminalGame(){
         frameCount = 0;
@@ -19,7 +22,6 @@ public class TerminalGame {
         manager = new GameManager();
         keys = new KeyEventHandler(this);
         setup();
-        //start the game (maybe make seperate method)
         startGame();
     }
     //sets a game up (by getting difficulty and wordCount)
@@ -40,11 +42,13 @@ public class TerminalGame {
     //end the game and ask if player wants to play again
     public void endGame(){
         started = false;
+        //show stats
         System.out.println(Ansi.CLEAR_SCREEN + Ansi.RESET);
         System.out.println("\033[" + 1 + ";" + 1 + "H");
         System.out.println( "YOU FINISHED THE GAME!\n\nYOUR STATS:\nReal WPM: " + manager.getRealWPM() + "\nRaw WPM: " + manager.getRawWPM() + "\nAccuracy: " + (manager.getAccuracy() *100 ) + "%");
         System.out.println("Play again? (Y/N)");
-        input = new Scanner( System.in );
+        //ask if want to play again
+        input = new Scanner(System.in); //why does it work when we make a new scanner?
         String test = input.nextLine();
         if ( test.equals("Y") ) {
             setup();
@@ -115,23 +119,24 @@ public class TerminalGame {
            System.out.println(" ⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠸⣿⣿⣿⣿⣿⣿⣿⣷⠀");
         }
     }
-}
-//This is really scuffed
-class KeyEventHandler extends JFrame implements KeyListener{
-    TerminalGame game;
-    public KeyEventHandler( TerminalGame game ){
-        this.game = game;
-        add( new JLabel(" CLICK ON THIS TO REGISTER INPUT") );
-        setSize( 300, 300);
-        setDefaultCloseOperation( JFrame.DO_NOTHING_ON_CLOSE );
-        addKeyListener( this );
-        setVisible( true );
-    }
-    public void keyTyped(KeyEvent e){
-    }
-    public void keyPressed(KeyEvent e){
-    }
-    public void keyReleased(KeyEvent e){
-        game.registerEvent( e );
+
+    //This is really scuffed but it works (okayish)
+    class KeyEventHandler extends JFrame implements KeyListener{
+        TerminalGame game;
+        public KeyEventHandler( TerminalGame game ){
+            this.game = game;
+            add( new JLabel("CLICK ON THIS TO REGISTER INPUT") );
+            setSize( 300, 300);
+            setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+            addKeyListener( this );
+            setVisible( true );
+        }
+        public void keyTyped(KeyEvent e){
+        }
+        public void keyPressed(KeyEvent e){
+        }
+        public void keyReleased(KeyEvent e){
+            game.registerEvent( e );
+        }
     }
 }

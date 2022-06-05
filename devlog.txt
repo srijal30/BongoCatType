@@ -108,6 +108,11 @@ Salaj & Alif :: in class changed GameManager to utilize characters instead of wo
 Salaj :: updated how TerminalGame works to work with new GameManager. Also attempted
 continous input from terminal.
 
+2022-06-03
+---------------------------------------------------------------------------------
+Salaj :: Made the TerminalGame "gui" nicer looking. A lot of bugs were squashed except for a big
+one where score not calculating properly.
+Salaj & Alif :: Made the score calculation accurate and also added a cute animation in the Terminal Game. We are getting closer to starting our next version (in processing!).
 
 FOR FUTURE (NOT IMPLEMENTED):
 2022-05-25
