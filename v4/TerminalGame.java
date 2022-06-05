@@ -15,7 +15,7 @@ public class TerminalGame {
     private boolean started; 
     private KeyEventHandler keys;
     
-    //Start a Game on Construction 
+    //on construction a game is started 
     public TerminalGame(){
         frameCount = 0;
         input = new Scanner( System.in );
@@ -24,6 +24,7 @@ public class TerminalGame {
         setup();
         startGame();
     }
+    
     //sets a game up (by getting difficulty and wordCount)
     public void setup(){
         //clear the old values
@@ -46,13 +47,44 @@ public class TerminalGame {
         System.out.println(Ansi.CLEAR_SCREEN + Ansi.RESET);
         System.out.println("\033[" + 1 + ";" + 1 + "H");
         System.out.println( "YOU FINISHED THE GAME!\n\nYOUR STATS:\nReal WPM: " + manager.getRealWPM() + "\nRaw WPM: " + manager.getRawWPM() + "\nAccuracy: " + (manager.getAccuracy() *100 ) + "%");
-        System.out.println("Play again? (Y/N)");
-        //ask if want to play again
+        
         input = new Scanner(System.in); //why does it work when we make a new scanner?
-        String test = input.nextLine();
-        if ( test.equals("Y") ) {
+        String choice;
+
+        //ask if they want to add their score to leaderboard
+        System.out.println("Do you want to add your score to the leaderboard? (Y/N)");
+        choice = input.nextLine();
+        if( choice.equals("Y") ){
+            System.out.print("What is your name?: ");
+            choice = input.nextLine();
+            Leaderboard.addEntry(choice, manager.getRealWPM(), manager.getAccuracy(), manager.getRawWPM() );
+        }        
+        
+        //ask if they want to see the leaderboard
+        System.out.println("Do you want to see the leaderboard? (Y/N)");
+        choice = input.nextLine();
+        if( choice.equals("Y") ){
+            System.out.println("Write G for Global or L for Local (G/L)");
+            choice = input.nextLine();
+            if( choice.equals("L") ){
+                int counter = 1;
+                for( Entry e: Leaderboard.localLeaderboard() ) System.out.printf("%d: %s\t%3.2f\t%3.2f%%\t%3.2f\n", counter++, e.getName(), e.realWPM(), e.accuracy(), e.rawWPM() );
+            }
+            else{
+                int counter = 1;
+                for( Entry e: Leaderboard.globalLeaderboard() ) System.out.printf("%d: %s\t%3.2f\t%3.2f%%\t%3.2f\n", counter++, e.getName(), e.realWPM(), e.accuracy(), e.rawWPM() );
+            }
+        }
+        
+        //ask if want to play again
+        System.out.println("\nPlay again? (Y/N)");
+        choice = input.nextLine();
+        if ( choice.equals("Y") ) {
             setup();
             startGame();
+        }
+        else{
+            System.exit(0);
         }
     }
     //update the screen aka the frame
@@ -85,8 +117,12 @@ public class TerminalGame {
     //register keyboard input
     public void registerEvent( KeyEvent e ){
         if( !started ) return;
+        //if shift-- ignore
+        if( e.getKeyCode() == 16 ){
+            return;
+        }
         //if backspace
-        if( e.getKeyCode() == 8 ){
+        else if( e.getKeyCode() == 8 ){
             if( manager.removeCharacter() ) colors.removeLast();
         }
         //if any other character

@@ -9,14 +9,6 @@ public class WordGenerator{
   public static void addWord( String word ){
     wordList.add( new Word( word ) );
   }
-  //shuffles randomly
-  public static void shuffle(){
-    Collections.shuffle( wordList );
-  }
-  //sort by difficulty (using merge sort)
-  public static void sort(){
-    Collections.sort( wordList );
-  }
   //return generated prompt
   public static String generate(int wC){
     //shuffle & sort for variation & desired difficulty sorting
@@ -28,6 +20,15 @@ public class WordGenerator{
       prompt += wordList.get(i).getValue() + " ";
     }
     return prompt;
+  }
+  
+  //shuffles randomly
+  private static void shuffle(){
+    Collections.shuffle( wordList );
+  }
+  //sort by difficulty (using quick sort)
+  private static void sort(){
+    Collections.sort( wordList );
   }
 }
 

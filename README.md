@@ -48,15 +48,21 @@ $java Woo
 * implemented a WordGenerator which will generate words dependent on difficulty
 * made the WordGenerator highly customizable in the sense that in the future we can easily decide what makes a word difficult. For now we decided on length.
 
--- will add details later too lazy rn 😴😴😴😴 --
+### v2
+* modified GameManager to be character based to improve score calculation
+* TerminalGame now takes in continuous input
 
+### v3
+* TerminalGame continous input bugs squashed
+* TerminalGame now has a feautre in which player can repeat playing the game
+* Refactored and improved the code throughout all the files
+
+### v4
+* added a Leaderboard class that reads and writes to a local.csv file (which will hold local leaderboard rankings) 
 
 
 
 <br>
-
-
-
 ██████╗░░█████╗░███╗░░██╗░██████╗░░█████╗░░█████╗░░█████╗░████████╗
 ██╔══██╗██╔══██╗████╗░██║██╔════╝░██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝
 ██████╦╝██║░░██║██╔██╗██║██║░░██╗░██║░░██║██║░░╚═╝███████║░░░██║░░░
