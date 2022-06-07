@@ -28,11 +28,15 @@ class Home extends Page {
     );
     //ABOUT PAGE BUTTON
     elements.add(
-      new Button( width/2, height/2-25, 15, "About", 100, 30, new About() )
+      new Button( width/2, height/2+25, 15, "About", 100, 30, new About() )
     );
     //GAME PAGE BUTTON
     elements.add(
       new Button( width/2, height/2-75, 15, "Play", 100, 30, new Game() )
+    );
+    //LEADERBOARD PAGE BUTTON
+    elements.add(
+      new Button( width/2, height/2-25, 15, "Leaderboard", 100, 30, new Leaderboard() )
     );
   }
 }
@@ -84,6 +88,14 @@ class Settings extends Page{
   void setup(){
     elements.add(
       new Label(width/2, 100, 100, "Settings")
+    );
+  }
+}
+
+class Leaderboard extends Page{
+  void setup(){
+    elements.add(
+      new Label(width/2, 100, 100, "Leaderboard")
     );
   }
 }
