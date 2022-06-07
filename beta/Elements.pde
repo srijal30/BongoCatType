@@ -109,6 +109,7 @@ class InputBox extends Button{
     super(x, y, size, text, w, h, null);
     selected = false;
   }
+
   //process
   void process(){
     super.process();
@@ -127,3 +128,8 @@ class InputBox extends Button{
     selected = true;
   }
 }
+/*
+class Scroll extends Element{
+  
+}
+*/
