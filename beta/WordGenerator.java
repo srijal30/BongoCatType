@@ -1,33 +1,34 @@
 import java.util.LinkedList;
-import java.util.Collections;
+import java.util.*;
 
 public class WordGenerator{
-  public static LinkedList<Word> wordList = new LinkedList<Word>();
+  public static LinkedList<Word> wordList = new LinkedList<Word>(); //wordList
   public static int difficulty = 3; //int value from 0-3
-  
+
   //for now only plain word w/o previous diff
   public static void addWord( String word ){
     wordList.add( new Word( word ) );
   }
-
-  //shuffles randomly
-  public static void shuffle(){
-    Collections.shuffle( wordList );
-  }
-  
-  //sort by difficulty
-  public static void sort(){
-    Collections.sort( wordList );
-  }
-
-  public static void generate(int wC, LinkedList<String> queue){
-    //shuffle & sort for variation but desired difficulty
+  //return generated prompt
+  public static String generate(int wC){
+    //shuffle & sort for variation & desired difficulty sorting
     shuffle();
     sort();
-    //add to queue from top
+    //add on to prompt
+    String prompt = "";
     for( int i = 0 ; i < wC; i++ ){
-      queue.addLast( wordList.get(i).getValue() );
+      prompt += wordList.get(i).getValue() + " ";
     }
+    return prompt;
+  }
+  
+  //shuffles randomly
+  private static void shuffle(){
+    Collections.shuffle( wordList );
+  }
+  //sort by difficulty (using quick sort)
+  private static void sort(){
+    Collections.sort( wordList );
   }
 }
 
@@ -48,14 +49,7 @@ class Word implements Comparable<Word>{
   //FUNCTION
   public String getValue(){return value;}
   public String toString(){return value + " " + diff;}
-  //for comparing to another word (based on whichever is closer to chosen difficulty)
-  /* 
-  to find the difficulty range (exclusive)
-  diff 0 : 0-6
-  diff 1 : 6-8
-  diff 2 : 8-10
-  diff 3:  10-22.5
-  */
+  //comparing based on difficulty levels
   public int compareTo( Word other ){
     int thisLevelDiff = Math.abs( WordGenerator.difficulty - diffLevel( this.diff ) );
     int otherLevelDiff = Math.abs( WordGenerator.difficulty - diffLevel( other.diff ) );
@@ -67,7 +61,11 @@ class Word implements Comparable<Word>{
   public static double calcDiff( String word ){
     return word.length();
   }
-  //Calculating diff level for word
+  /*Calculating diff level for word
+  diff 0 : 0-6
+  diff 1 : 6-8
+  diff 2 : 8-10
+  diff 3:  10-22.5*/
   public static int diffLevel( double d ){
     if( d < 6 ) return 0;
     else if( d < 8 ) return 1;
