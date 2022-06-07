@@ -52,6 +52,3 @@ void toggleTheme(){
     TEXTCOLOR = #000000;
   }
 }
-
-
-

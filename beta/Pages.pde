@@ -18,7 +18,7 @@ class Home extends Page {
   void setup(){
     //BONGOCAT ANIMATION
     elements.add(
-      new Animation(width/2-290, height/2+10,
+      new Animation(width/2-530, height/2-125,
         new PImage[]{ loadImage("handsup.png"), loadImage("handsdown.png") }
       )
     );
