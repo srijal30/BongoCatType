@@ -11,6 +11,7 @@ void setup() {
     surface.setTitle("BongoCatType");
     surface.setResizable(true);
     frameRate(60);
+    //surface.setIcon(  loadImage("handsdown.png") );
     toggleTheme();
     
     //set the current page to home
@@ -33,7 +34,6 @@ void draw(){
   //settings button
   //settings.process();
   //settings.draw();
-
 }
 
 //for theme switchings

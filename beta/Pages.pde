@@ -65,17 +65,14 @@ class Game extends Page {
 
 class About extends Page {
   void setup(){
-    
     //ABOUT PAGE HEADER
     elements.add( 
       new Label( width/2, height/2-250, 75, "About Page" )
     );
-
     //ABOUT PAGE INFORMATION
     elements.add(
       new TextBox( width/2, height/2-150, 25, "BongoCatType took heavy inspiration from another program\n called MonkeyType. Although MonkeyType is a very cool app, we feel like it needed some improvements. Thats why we spent the last few years developing BongoCatType, the best typing\n experience the world has seen so far.\n - Faiyaz, Salaj, Alif", 400 )
     );
-
     //HOME PAGE BUTTON
     elements.add(
       new Button( width/2, height/2+125, 15, "Home", 100, 30, new Home() )
@@ -91,14 +88,16 @@ class Settings extends Page{
     );
   }
 }
-<<<<<<< HEAD
-=======
 
 class Leaderboard extends Page{
   void setup(){
+    //LEADERBOARD LABEL
     elements.add(
-      new Label(width/2, 100, 100, "Leaderboard")
+      new Label(width/2, 150, 100, "Leaderboard")
+    );
+    //HOME PAGE BUTTON
+    elements.add(
+      new Button( width/2, height/2+250, 15, "Home", 100, 30, new Home() )
     );
   }
 }
->>>>>>> c1b74e2ac522fddcb71f9720c0586dea2cc9885d
