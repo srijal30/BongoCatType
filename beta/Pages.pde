@@ -99,5 +99,11 @@ class Leaderboard extends Page{
     elements.add(
       new Button( width/2, height/2+250, 15, "Home", 100, 30, new Home() )
     );
+    
+
+    //SCROLL ELEMENT TESTER
+    elements.add(
+      new ScrollTester(   0, 0 , 20, "weldfjsdkl;fjsdl;fjsdl;fkjdklfjdlfkjdl;fjdklfjdlkfjdlfjdklfjdklfdjklfdj"  )
+    );
   }
 }

@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 class Element{
   float x, y;
   Element(float x, float y){this.x = x; this.y = y;}
@@ -129,6 +131,49 @@ class InputBox extends Button{
 }
 
 //THIS WILL BE USEFUL
-//textAscent();
+//textAscent(); <-- returns height of words
+//textWidth(); <-- returns width of words
 
-//for scrolling labels
+//
+class ScrollTester extends Element{
+
+  int maxWidth;
+  LinkedList<Label> labels;
+  
+  ScrollTester( float x, float y, int maxWidth, String text ) {
+    super(x, y);
+    this.maxWidth = maxWidth;
+
+    String current = "";
+    int currentY = 10;
+    for( int i = 0; i < text.length(); i++ ){
+      if( textWidth(current) > maxWidth ){
+        labels.add( new Label( width/2, currentY, 15, current) );
+        current = "";
+        currentY += 20;
+      }
+    }
+    labels.add( new Label( width/2, currentY,15, current ) );
+  }
+
+  void scroll( int lines ){
+
+  }
+
+  void process(){
+
+    if ( keyPressed ){
+      if( keyCode == UP ) println("up");
+      else if( keyCode == DOWN ) println("down");
+      keyPressed = false; //will this ruin other keypress detection?
+    }
+  }
+
+  void draw(){
+    for( Label l : labels ){
+      l.draw();
+    }
+
+  }
+  
+}
