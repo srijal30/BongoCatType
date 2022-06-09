@@ -22,10 +22,13 @@ class Home extends Page {
         new PImage[]{ loadImage("handsup.png"), loadImage("handsdown.png") }
       )
     );
-    //TITLE LABEL
-    elements.add( 
-      new Label( width/2, height/2-225, 100, "BongoCatType" )
+     //GAMEFONT
+    elements.add(
+      new Animation(width/2-430, height/2-380,
+        new PImage[]{ loadImage("font.png") }
+      )
     );
+
     //ABOUT PAGE BUTTON
     elements.add(
       new Button( width/2, height/2+25, 15, "About", 100, 30, new About() )
@@ -37,6 +40,10 @@ class Home extends Page {
     //LEADERBOARD PAGE BUTTON
     elements.add(
       new Button( width/2, height/2-25, 15, "Leaderboard", 100, 30, new Leaderboard() )
+    );
+    //RESULTS PAGE BUTTON
+    elements.add(
+      new Button( width/2, height/2-125, 15, "Results", 100, 30, new Results() )
     );
   }
 }
@@ -72,6 +79,14 @@ class Leaderboard extends Page{
   }
 }
 
+class Results extends Page{
+  void setup(){
+    //HOME PAGE BUTTON
+    elements.add(
+      new Button( width/2, height/2+250, 55, "Bongo!", 190, 100, new Home() )
+    );
+  }
+}
 
 
 class Test extends Page{
