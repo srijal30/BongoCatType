@@ -171,8 +171,9 @@ class Game extends Page {
       if( key == BACKSPACE ){
         if( manager.removeCharacter() ) colors.removeLast();
       }
-      else if ( key != SHIFT ){
-        colors.add( manager.pushCharacter( key) );
+      else if( key == ' ' ) colors.add(manager.pushCharacter(key) );
+      else if( (""+key).matches("[a-zA-Z]+") ){
+        colors.add(manager.pushCharacter(key) );
       }
       keyPressed = false;
   }
