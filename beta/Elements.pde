@@ -22,49 +22,8 @@ class Label extends Element{
     textSize(size);
     text( text, x, y);
   }
-}
-
-//for interactable buttons that take you to other pages
-class Button extends Label{
-  color current;
-  float w, h;
-  Page nextPage;
-  Button(float x, float y, float size, String text, float w, float h, Page next){
-    super(x, y, size, text);
-    this.w = w; this.h = h;
-    this.text = text; nextPage = next;
-    current = STANDARD;
-  }
-  //check mouse position and if mouse was clicked, act accordingly
-  void process(){
-    super.process();
-    boolean onButton = mouseX > x-w/2 && mouseX < x+w/2 && mouseY > y-h/2 && mouseY < y+h/2;
-    //color is standard
-    if( !onButton ) current = STANDARD;
-    //if there is nextPage, go to it. Else print no connection
-    else if( mousePressed ) onClick();
-    //mouse is hovering over button
-    else current = HOVER;
-  }
-  //what happens when clicked
-  void onClick(){ 
-    if( nextPage == null ) println("NO PAGE CONNECTED"); 
-    else{
-      currentPage = nextPage; 
-      currentPage.setup(); 
-      mousePressed = false;
-    }
-  }
-  void draw(){
-    rectMode(CENTER);
-    //make outline first
-    fill(OUTLINE);
-    rect( x, y, w, h);
-    //then make inside
-    fill(current);
-    rect( x, y, w-4, h-4);
-    //render the label
-    super.draw();
+  String getText(){
+    return text;
   }
 }
 
@@ -87,6 +46,7 @@ class Animation extends Element{
   }
 }
 
+//needs reworking
 //for textboxes with a fixed width
 class TextBox extends Label{
   int width;
@@ -104,76 +64,6 @@ class TextBox extends Label{
   }
 }
 
-//for user input
-class InputBox extends Button{
-  boolean selected;
-  InputBox(float x, float y, float size, String text, float w, float h){
-    super(x, y, size, text, w, h, null);
-    selected = false;
-  }
-  //process
-  void process(){
-    super.process();
-    if( selected ){
-      if( keyPressed ){
-        if( key == ENTER ) selected = false;
-        else if (key == BACKSPACE && !super.text.equals("")) super.text = super.text.substring(0, super.text.length()-1 );
-        else if ( Character.isLetterOrDigit(key) ) super.text += key;
-        keyPressed = false;
-      }
-    } 
-  }
-  //override the onClick
-  void onClick(){
-    super.text = "";
-    selected = true;
-  }
-}
-
 //THIS WILL BE USEFUL
 //textAscent(); <-- returns height of words
 //textWidth(); <-- returns width of words
-
-//
-class ScrollTester extends Element{
-
-  int maxWidth;
-  LinkedList<Label> labels;
-  
-  ScrollTester( float x, float y, int maxWidth, String text ) {
-    super(x, y);
-    this.maxWidth = maxWidth;
-
-    String current = "";
-    int currentY = 10;
-    for( int i = 0; i < text.length(); i++ ){
-      if( textWidth(current) > maxWidth ){
-        labels.add( new Label( width/2, currentY, 15, current) );
-        current = "";
-        currentY += 20;
-      }
-    }
-    labels.add( new Label( width/2, currentY,15, current ) );
-  }
-
-  void scroll( int lines ){
-
-  }
-
-  void process(){
-
-    if ( keyPressed ){
-      if( keyCode == UP ) println("up");
-      else if( keyCode == DOWN ) println("down");
-      keyPressed = false; //will this ruin other keypress detection?
-    }
-  }
-
-  void draw(){
-    for( Label l : labels ){
-      l.draw();
-    }
-
-  }
-  
-}

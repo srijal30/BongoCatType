@@ -32,33 +32,11 @@ class Home extends Page {
     );
     //GAME PAGE BUTTON
     elements.add(
-      new Button( width/2, height/2-75, 15, "Play", 100, 30, new Game() )
+      new Button( width/2, height/2-75, 15, "Play", 100, 30, new GameSetup() )
     );
     //LEADERBOARD PAGE BUTTON
     elements.add(
       new Button( width/2, height/2-25, 15, "Leaderboard", 100, 30, new Leaderboard() )
-    );
-  }
-}
-
-class Game extends Page {
-  GameManager manager;
-  Game(){
-    super();
-    manager = new GameManager();  
-  }
-  void setup(){
-    //TITLE
-    elements.add(
-      new Label( width/2, height/2-225, 100, "Game")
-    );
-    //RETURN HOME
-    elements.add(
-      new Button( width/2, height/2+300, 15, "Exit", 100, 30, new Home() )
-    );
-    //INPUT BOX
-    elements.add(
-      new InputBox( width/2, height/2, 15, "Input a Value", 100, 30)
     );
   }
 }
@@ -71,20 +49,11 @@ class About extends Page {
     );
     //ABOUT PAGE INFORMATION
     elements.add(
-      new TextBox( width/2, height/2-150, 25, "BongoCatType took heavy inspiration from another program\n called MonkeyType. Although MonkeyType is a very cool app, we feel like it needed some improvements. Thats why we spent the last few years developing BongoCatType, the best typing\n experience the world has seen so far.\n - Faiyaz, Salaj, Alif", 400 )
+      new TextBox( width/2, height/2-150, 25, "BongoCatType took heavy inspiration from another program\n called MonkeyType. Although MonkeyType is a very cool app, we feel like it needed some improvements. Thats why we spent the last few years developing BongoCatType, the best typing\n experience the world has seen so far.\n\n - Faiyaz, Salaj, Alif", 500 )
     );
     //HOME PAGE BUTTON
     elements.add(
-      new Button( width/2, height/2+125, 15, "Home", 100, 30, new Home() )
-    );
-
-  }
-}
-
-class Settings extends Page{
-  void setup(){
-    elements.add(
-      new Label(width/2, 100, 100, "Settings")
+      new Button( width/2, height/2+250, 15, "Home", 100, 30, new Home() )
     );
   }
 }
@@ -100,10 +69,24 @@ class Leaderboard extends Page{
       new Button( width/2, height/2+250, 15, "Home", 100, 30, new Home() )
     );
     
-
-    //SCROLL ELEMENT TESTER
-    elements.add(
-      new ScrollTester(   0, 0 , 20, "weldfjsdkl;fjsdl;fjsdl;fkjdklfjdlfkjdl;fjdklfjdlkfjdlfjdklfjdklfdjklfdj"  )
-    );
   }
+}
+
+
+
+class Test extends Page{
+
+  void setup(){
+
+    SelectButton[] test = {
+      new SelectButton(width/2, height/2, 15, "HAPPY", 100, 30),
+      new SelectButton(width/2, height/2+30, 15, "DAYS", 100, 30),
+      new SelectButton(width/2, height/2+60, 15, "BE COMING", 100, 30),
+      new SelectButton(width/2, height/2+90, 15, "SIR", 100, 30)
+    };
+
+    elements.add( new SelectButtonGroup( test ) );
+
+  }
+
 }

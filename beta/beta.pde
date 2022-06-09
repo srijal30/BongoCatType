@@ -14,12 +14,17 @@ void setup() {
     //surface.setIcon(  loadImage("handsdown.png") );
     toggleTheme();
     
+    //FOR TESTING
+    currentPage = new Test();
+
+
     //set the current page to home
     currentPage = new Home();
     currentPage.setup();
 
-    //create settings button
-    settings = new Button(width/2, height/2, 20, "*", 30, 30, new Settings());
+    courier = createFont( "Courier New", 12);
+    normal = createFont("Lucida Sans", 12);
+    textFont(normal);
 }
 
 void draw(){
@@ -34,13 +39,20 @@ void draw(){
   //settings button
   //settings.process();
   //settings.draw();
+  println( mouseX + " " + mouseY);
 }
 
 //for theme switchings
 color STANDARD;
 color HOVER;
+color SELECTED;
 color OUTLINE;
 color TEXTCOLOR;
+color GRAY = #808080;
+color RED = #FF0000;
+color BLACK = #000000;
+PFont normal;
+PFont courier;
 boolean darkMode = false;
 void toggleTheme(){
   if( darkMode ){
@@ -48,7 +60,9 @@ void toggleTheme(){
   else{
     STANDARD = #ffffff;
     HOVER = #a8a8a8;
+    SELECTED = #90EE90;
     OUTLINE = #000000;
     TEXTCOLOR = #000000;
   }
 }
+
