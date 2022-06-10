@@ -224,7 +224,7 @@ class Result extends Page {
     }
     else{
       elements.add( new Label(width/2, height/2-300, 25, "You are pretty good at typing!\n Do you touch grass?") );
-      elements.add( new Animation(width/2-250, height/2-200, bongo) );
+      elements.add( new Animation(width/2-250, height/2-200, happy) );
     }
   }
   void setup(){
