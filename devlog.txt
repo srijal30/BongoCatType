@@ -15,12 +15,14 @@ OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - GameManager will be a reusable object by the Game programs as a means of game logic.
 - We will use LinkedLists (which will act like queues) for userWords and originalWords
+- We were able to change the color in processing by rendering each letter individually.
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- How do you generate words based on difficulty inputted by user?
-- What datastructure should we use to store words?
-- Should our WordGenerator implememnt public and static variables? Is it bad practice?
+- what is a better way to generate words? better way to determine their difficulty?
+- how can we scroll down the typing game in processing 1 line at a time? 
+- how can we scroll back up in the typing in processing is the user presses backspace?
+- getting the Leaderboard is painfully slow...
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -29,19 +31,20 @@ COOL STUFF LEARNED
 force push commits to github
 - you can visualize your commits with gitk
 - Java has built in sort and shuffle. For sort, you can implement Comparable to create a custom sort
+- HTTP REQUEST in Java
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - we changed how userWords and originalWords will be stored
 - we changed how word generation wouldWork
+- we had to implement a colors LinkedList which would keep track of wheter letters were wrong or right
+- we had to rewrite GameManager to let a Game Instance know when the game was over.
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -do not blindly add, commit, and push to ur repo
 -do not start coding a feature that you havent fully fleshed out yet
 -test incrementally to see if a feature is working before you add it to the rest of your codebase
-
-tales of wisdom gained...
 
 ||||||||||||||||||||||||||||||||||||||||||
 
@@ -118,15 +121,23 @@ Salaj & Alif :: Made the score calculation accurate and also added a cute animat
 --------------------------------------------------------------------------------
 Salaj :: Added Leaderboard.java and got Global Leaderboard and Local Leaderboard working
 
+2022-06-06
+------------------------------------------------------------------------------------
+Everyone :: Planned out how the Processing Game UI would look.
+Salaj :: Started creating compononents that would be useful for the processing game like selectable buttons.
 
-FOR FUTURE (NOT IMPLEMENTED):
-2022-05-25
---------------------------------------------------------------
-Everyone :: Initialized necassary repo files and started devlog
-2022-05-25
---------------------------------------------------------------
-Everyone :: Initialized necassary repo files and started devlog
-2022-05-25
---------------------------------------------------------------
-Everyone :: Initialized necassary repo files and started devlog
-==============================================================
+2022-06-07
+------------------------------------------------------------------------------------
+Everyone :: Created the Page frameworks in processing.
+Salaj and Alif :: Came up with a way to implement a scrollable leaderboard in processing (using linkedList).
+Faiayz :: Created the Results page where the Users Score will be displayed
+
+2022-06-08
+------------------------------------------------------------------------------------
+Everyone :: Discussed how we could translate our terminal game into processing (the actual typing part). Started work
+on a system that would make use of drawing each letter individually.
+Faiayz :: Worked on the Art and worked on loaded the necassary files in for the processing project.
+
+2022-06-09
+------------------------------------------------------------------------------------
+Salaj :: Finalized the Processing Game by implementing the Leaderboard and polishing the Game UI.

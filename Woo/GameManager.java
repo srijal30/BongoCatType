@@ -61,7 +61,7 @@ public class GameManager {
     //up to the game instance how often they call this function
     //if returns true, the game is over
     public boolean update(){
-        if( inputQ.size() > textQ.size() ){
+        if( inputQ.size() >= textQ.size() ){
             return true;
         }
         //if not possible to update then ignore this call

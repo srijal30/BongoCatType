@@ -35,7 +35,7 @@ $java Woo
 ## Extra Features:
 
 
-## Version Log:
+## Version Log: (we shouldve made more versions)
 
 ### v0
 * created repo + neccassary files
@@ -64,6 +64,11 @@ $java Woo
 * user can now choose to add their entry to leaderboards and check the leaderboards after finishing a game
 
 ### v5
+* fixed all major bugs for terminalGame
+
+### v6 (we shouldve split this up)
+* the version where we implemented a processing game
+
 
 <br>
 ██████╗░░█████╗░███╗░░██╗░██████╗░░█████╗░░█████╗░░█████╗░████████╗
