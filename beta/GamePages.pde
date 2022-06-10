@@ -85,20 +85,22 @@ class Game extends Page {
   Label raw;
   Label real;
   boolean started;
+  String name;
+
+  //for displaying properly
   LinkedList<Boolean> colors;
   int renderStart; // where we start rendering text <it incrememnets by row size>
-  int increment = 10;
 
   Game(String name, int diff, int wC){
     super();
     WordGenerator.difficulty = diff;
     manager = new GameManager();
+    this.name = name;
     //setting up the game
     colors = new LinkedList<Boolean>();
     started = false;
     manager.newGame( wC );
     int renderStart = 0;
-    println(diff);
   }
 
   void setup(){
@@ -126,44 +128,53 @@ class Game extends Page {
     //check if key is pressed
     if( keyPressed ){
         processKeyPress();
-        manager.update();
+        if( manager.update() ) endGame();
     }
     super.process();
   }
 
   void draw(){
     super.draw();
-    int startX = 100;
-    int startY = 100;
-
+    int currentX = 250;
+    int currentY = 267;
     //draw the text
     textFont(courier);
+    textSize(20);
+
+    float incrementX = textWidth("M");
+    float incrementY = textAscent() +1;
+
+
     String userStuff = manager.getInput();
-    for( int i = 0; i < userStuff.length(); i++ ){
+    for( int i = 0+renderStart; i < userStuff.length(); i++ ){
       if( colors.get(i) ) fill(BLACK);
       else fill(RED);
-      text( userStuff.charAt(i), startX, startY );
-      startX += increment;
-      if( startX > 400 ){
-        startX = 100;
-        startY += increment;
+      //check if space
+      if( userStuff.charAt(i) == ' ' && !colors.get(i) ) text( "_", currentX, currentY );
+      else text( userStuff.charAt(i), currentX, currentY );
+      currentX += incrementX;
+      if( currentX > 750 ){
+        renderStart += i;
+        currentX = 250;
+        currentY += incrementY;
       }
     }
     //continue filling from where we left off
     String gameStuff = manager.getText( userStuff.length() );
     fill(GRAY);
     for( int i = 0; i < gameStuff.length(); i++ ){
-      text( gameStuff.charAt(i), startX, startY );
-      startX += increment;
-      if( startX > 400 ){
-        startX = 100;
-        startY += increment;
+      text( gameStuff.charAt(i), currentX, currentY );
+      currentX += incrementX;
+      if( currentX > 700 ){
+        currentX = 250;
+        currentY += incrementY;
       }        
     }
     textFont(normal);
   }
 
   //processing a keypress
+  //there is an issue with this
   void processKeyPress(){
       //start the timer if it hasnt been started alr
       if( !started ) { started = true; manager.startTimer(); }
@@ -171,20 +182,39 @@ class Game extends Page {
       if( key == BACKSPACE ){
         if( manager.removeCharacter() ) colors.removeLast();
       }
-      else if( key == ' ' ) colors.add(manager.pushCharacter(key) );
-      else if( (""+key).matches("[a-zA-Z]+") ){
+      else{
         colors.add(manager.pushCharacter(key) );
       }
       keyPressed = false;
   }
 
   void endGame(){
-
+    //push to leaderboard
+    Leaderboard.addEntry(name, manager.getRealWPM(), manager.getAccuracy(), manager.getRawWPM() );
+    //take user to next page
+    currentPage = new Result( manager.getRealWPM(), manager.getAccuracy(), manager.getRawWPM() );
+    currentPage.setup();
   }
 }
 
 //page where you get the results for your game
-class GameResult extends Page {
+class Result extends Page {
+  String raw;
+  String real;
+  String acc;
+
+  Result( double raw, double real, double acc ){
+    this.real = String.format("%3.2f", real ) ;
+    this.acc =  String.format("%3.2f%%",acc*100) ;
+    this.raw =  String.format("%3.2f", raw ) ;
+  }
+
+  void setup(){
+    //HOME PAGE BUTTON
+    elements.add(
+      new Button( width/2, height/2+250, 55, "Bongo!", 190, 100, new Home() )
+    );
+  }
 
 }
 
