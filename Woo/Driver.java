@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Woo{
+public class Driver{
 
     public static void main(String[] args) throws FileNotFoundException{
         //load the words (in the future have a CSV)
