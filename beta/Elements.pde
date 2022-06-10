@@ -11,14 +11,20 @@ class Element{
 class Label extends Element{
   String text;
   float size;
+  color fil;
   Label(float x, float y, float size, String text){
     super(x,y);
     this.size = size; this.text = text;
+    fil = TEXTCOLOR;
+  }
+  Label( float x, float y, float size, String text, color fil){
+    super(x,y);
+    this.size = size; this.text = text; this.fil = fil;
   }
   void draw(){
     super.draw();
     textAlign(CENTER);
-    fill(TEXTCOLOR);
+    fill(fil);
     textSize(size);
     text( text, x, y);
   }
@@ -67,3 +73,47 @@ class TextBox extends Label{
 //THIS WILL BE USEFUL
 //textAscent(); <-- returns height of words
 //textWidth(); <-- returns width of words
+
+
+//does not matter the position
+class ScrollLabelList extends Element{
+  LinkedList<String> labels;
+  int head = 0;
+  public ScrollLabelList( float x, float y, LinkedList<String> labels ){
+    super(x,y);
+    head = 0;
+    this.labels = labels;
+  }
+  //detect arrow keys
+  void process(){
+    if( keyPressed ){
+      if( keyCode == UP ){
+        scrollUp();
+      }
+      else if( keyCode == DOWN){
+        scrollDown();
+      }
+    }
+  }
+  void scrollUp(){
+    head -= 1;
+    if( head < 0 ) head = 0;
+  }
+  void scrollDown(){
+    if( head >= labels.size()-1 ) return;
+    head +=1;
+  }
+  //renders only the top X labels
+  void draw(){
+    //fill a nice background for leaderboard
+    textAlign(CENTER);
+    textSize(20);
+    int renderAmount = 10;
+    float incrementY = textAscent();
+    float currentY = super.y;
+    for( int i = head; i < Math.min(head+renderAmount, labels.size() ); i++ ){
+      text( labels.get(i), super.x, currentY );
+      currentY += incrementY;
+    }
+  }
+}

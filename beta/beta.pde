@@ -5,21 +5,17 @@ void setup() {
     //load the words
     String[] words = loadStrings("default.txt");
     for ( String word : words ) WordGenerator.addWord( word );
-    
     //load the required assets
     loadFiles();
-
     //window setup
     size(1000, 800);
     surface.setTitle("BongoCatType");
     surface.setResizable(true);
     frameRate(60);
     surface.setIcon(  switchIcon );
-
     //set the current page to home
     currentPage = new Home();
     currentPage.setup();
-
     textFont(normal);
 }
 
@@ -35,13 +31,18 @@ void draw(){
 
 //load all the files
 void loadFiles(){
-  title = loadImage("images/title.png");
-  switchIcon = loadImage("images/switch.png");
-  happy = new PImage[]{ loadImage("images/happy1.png"),loadImage("images/happy2.png") } ;
-  sad = new PImage[]{ loadImage("images/sad1.png"),loadImage("images/sad2.png") } ;
-  bongo = new PImage[]{ loadImage("images/normal1.png"),loadImage("images/normal2.png") } ;
-  courier = createFont( "Courier New", 12);
-  normal = createFont("Lucida Sans", 12);
+  title = loadImage("assets/title.png");
+  switchIcon = loadImage("assets/switch.png");
+  happy = new PImage[]{ loadImage("assets/happy1.png"),loadImage("assets/happy2.png") } ;
+  sad = new PImage[]{ loadImage("assets/sad1.png"),loadImage("assets/sad2.png") } ;
+  bongo = new PImage[]{ loadImage("assets/normal1.png"),loadImage("assets/normal2.png") } ;
+  
+  typing = createFont("assets/typing.ttf", 12);
+  normal = createFont("assets/normal.ttf", 12);
+}
+
+void keyReleased() {
+  currentPage.processKeyPress();  
 }
 
 //FOR LOOKING GOOD UI
@@ -53,8 +54,8 @@ PImage[] sad;
 PImage[] bongo;
 
 //FONT STUFF
+PFont typing;
 PFont normal;
-PFont courier;
 
 //for theme switchings
 color STANDARD = #ffffff;

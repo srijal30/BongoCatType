@@ -9,26 +9,26 @@ class GameSetup extends Page{
     SelectButton playButton;
     void setup(){
         //Whats Your Name?
-        nameField = new InputBox( width/2, height/2-270, 15, "Your Name", 100, 30);
+        nameField = new InputBox( width/2, height/2-270, 18, "Your Name", 100, 30);
         elements.add( new Label( width/2, height/2-300, 20, "Input Your Name:" ) );
         elements.add(  nameField  );
         //Choose A Difficulty?
         elements.add( new Label( width/2, height/2-130, 20, "Choose A Difficulty:" ) );
         SelectButton[] diffs = new SelectButton[]{
-            new SelectButton( width/2-225, height/2-100, 15, "Easy", 100, 30),
-            new SelectButton( width/2-75, height/2-100, 15, "Medium", 100, 30),
-            new SelectButton( width/2+75, height/2-100, 15, "Hard", 100, 30),
-            new SelectButton( width/2+225, height/2-100, 15, "Extreme", 100, 30)
+            new SelectButton( width/2-225, height/2-100, 18, "Easy", 100, 30),
+            new SelectButton( width/2-75, height/2-100, 18, "Medium", 100, 30),
+            new SelectButton( width/2+75, height/2-100, 18, "Hard", 100, 30),
+            new SelectButton( width/2+225, height/2-100, 18, "Extreme", 100, 30)
         };
         diffChoice = new SelectButtonGroup( diffs );
         elements.add( diffChoice );
         //Choose Word Count?
         elements.add( new Label( width/2, height/2+40, 20, "Choose A WordCount:" ) );
         SelectButton[] wiffs = new SelectButton[]{
-            new SelectButton( width/2-225, height/2+70, 15, "10", 100, 30),
-            new SelectButton( width/2-75, height/2+70, 15, "25", 100, 30),
-            new SelectButton( width/2+75, height/2+70, 15, "50", 100, 30),
-            new SelectButton( width/2+225, height/2+70, 15, "100", 100, 30)
+            new SelectButton( width/2-225, height/2+70, 18, "10", 100, 30),
+            new SelectButton( width/2-75, height/2+70, 18, "25", 100, 30),
+            new SelectButton( width/2+75, height/2+70, 18, "50", 100, 30),
+            new SelectButton( width/2+225, height/2+70, 18, "100", 100, 30)
         };
         wordCountChoice = new SelectButtonGroup( wiffs );
         elements.add( wordCountChoice );
@@ -37,7 +37,7 @@ class GameSetup extends Page{
         elements.add( playButton );
         //RETURN HOME
         elements.add(
-            new Button( width/2, height/2+325, 15, "Exit", 100, 30, new Home() )
+            new Button( width/2, height/2+325, 18, "Exit", 100, 30, new Home() )
         );
     }
     //updates values accordingly
@@ -110,7 +110,7 @@ class Game extends Page {
     );
     //RETURN HOME
     elements.add(
-      new Button( width/2, height/2+300, 15, "Exit", 100, 30, new Home() )
+      new Button( width/2, height/2+300, 18, "Exit", 100, 30, new Home() )
     );
     //LIVE STAT LABELS
     real = new Label( width/2 - 150 , height/2+240, 20, "0.0" );
@@ -125,37 +125,42 @@ class Game extends Page {
     real.text = String.format("%3.2f", manager.getRealWPM()) ;
     acc.text =  String.format("%3.2f%%",manager.getAccuracy()*100) ;
     raw.text =  String.format("%3.2f", manager.getRawWPM() ) ;
-    //check if key is pressed
-    if( keyPressed ){
-        processKeyPress();
-        if( manager.update() ) endGame();
-    }
     super.process();
   }
 
   void draw(){
     super.draw();
-    int currentX = 250;
-    int currentY = 267;
+
     //draw the text
-    textFont(courier);
-    textSize(20);
+    int maxY = 533;
+    int maxX = 667+75;
+    int startX = 333-75;
+    int startY = 267;
 
+    int currentX = startX;
+    int currentY = startY;
+    textFont(typing);
+    textSize(18);
     float incrementX = textWidth("M");
-    float incrementY = textAscent() +1;
-
+    float incrementY = textAscent()+10;
 
     String userStuff = manager.getInput();
-    for( int i = 0+renderStart; i < userStuff.length(); i++ ){
+    for( int i = 0; i < userStuff.length(); i++ ){
+      if( i < renderStart ){
+        continue;
+      }
+      if( currentY > maxY ){
+        renderStart = i;
+        continue;
+      }
       if( colors.get(i) ) fill(BLACK);
       else fill(RED);
       //check if space
       if( userStuff.charAt(i) == ' ' && !colors.get(i) ) text( "_", currentX, currentY );
       else text( userStuff.charAt(i), currentX, currentY );
       currentX += incrementX;
-      if( currentX > 750 ){
-        renderStart += i;
-        currentX = 250;
+      if( currentX > maxX ){
+        currentX = startX;
         currentY += incrementY;
       }
     }
@@ -163,10 +168,13 @@ class Game extends Page {
     String gameStuff = manager.getText( userStuff.length() );
     fill(GRAY);
     for( int i = 0; i < gameStuff.length(); i++ ){
+      if( currentY > maxY ){
+        continue;
+      }
       text( gameStuff.charAt(i), currentX, currentY );
       currentX += incrementX;
-      if( currentX > 700 ){
-        currentX = 250;
+      if( currentX > maxX ){
+        currentX = startX;
         currentY += incrementY;
       }        
     }
@@ -185,7 +193,7 @@ class Game extends Page {
       else{
         colors.add(manager.pushCharacter(key) );
       }
-      keyPressed = false;
+      if( manager.update() ) endGame();
   }
 
   void endGame(){
