@@ -14,19 +14,20 @@ A typing game that can be played on terminal. Will be developed using Java.
 
 ### Terminal Version
 1. clone the repo
-2. install java
+2. install java and jdk 11
 3. run the following commands in your terminal:
 ```
-$javac Woo.java
-$java Woo
+$cd Woo
+$javac Driver.java
+$java Driver 
 ```
 
 ### Processing Version
-1. download processing
-2. open processing.exe
-3. clone the repo
-4. open the path to the cloned repo in the processing application
-5. press run
+1. clone the repo
+2. download processing
+3. open PDE
+4. click file > open > and then navigate to the cloned repo and Woo file 
+5. click the run button. 
 
 
 ## Key Features:
