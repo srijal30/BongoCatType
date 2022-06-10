@@ -62,8 +62,9 @@ class About extends Page {
 }
 
 class LeaderboardPage extends Page{
+  boolean global = false; //if false this means local
+  LinkedList<String> scores;
 
-  boolean global = true; //if false this means local
   SelectButton changer;
   void setup(){
     //LEADERBOARD LABEL
@@ -72,11 +73,43 @@ class LeaderboardPage extends Page{
     );
     //HOME PAGE BUTTON
     elements.add(
-      new Button( width/2, height/2+250, 18, "Home", 100, 30, new Home() )
+      new Button( width/2, height/2+290, 18, "Home", 100, 30, new Home() )
     );
-    changer = new SelectButton(width/2, height/2, 18, "Change", 100, 30);
+    //CHANGE FROM GLOBAL AND LOCAL
+    changer = new SelectButton(width/2, height/2+250, 18, "Local", 100, 30);
     elements.add( changer );
+    //LEADERBAORD
+    elements.add( new Label(width/2, height/2-200, 20, "Rank:       Name:       RealWPM:       Accuracy:        RawWPM:")   );
+    renderLeaderboard();
+    elements.add( new ScrollLabelList(width/2, height/2-150, scores )  );
   }
+  void process(){
+    if( changer.selected ){
+      changer.selected = false;
+      global = !global;
+      renderLeaderboard();
+      if( global ) changer.setText("Global");
+      else changer.setText("Local");
+    }
+    ((ScrollLabelList) elements.get(4)).labels = scores;    
+    super.process();
+  }
+
+  void renderLeaderboard(){
+    scores = new LinkedList<String>();
+    ArrayList<Entry> entries;
+    if( global ){
+      entries = Leaderboard.globalLeaderboard();
+    }
+    else{
+      entries = Leaderboard.localLeaderboard();
+    }
+    for( int i = 0; i < entries.size(); i++){
+      Entry current = entries.get(i);
+      scores.add( String.format( "%d:          %s          %3.2f          %3.2f%%          %3.2f", i+1, current.getName(), current.realWPM(), current.accuracy()*100, current.rawWPM() ) );
+    }
+  }
+
 }
 
 class Test extends Page{

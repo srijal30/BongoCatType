@@ -31,6 +31,9 @@ class Label extends Element{
   String getText(){
     return text;
   }
+  void setText( String other ){
+    text = other;
+  }
 }
 
 //for animations
@@ -105,12 +108,13 @@ class ScrollLabelList extends Element{
   }
   //renders only the top X labels
   void draw(){
-    //fill a nice background for leaderboard
+    //setup vars
     textAlign(CENTER);
     textSize(20);
-    int renderAmount = 10;
+    int renderAmount = 18;
     float incrementY = textAscent();
     float currentY = super.y;
+    fill(#000000);
     for( int i = head; i < Math.min(head+renderAmount, labels.size() ); i++ ){
       text( labels.get(i), super.x, currentY );
       currentY += incrementY;

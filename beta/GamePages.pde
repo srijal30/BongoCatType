@@ -210,18 +210,31 @@ class Result extends Page {
   String raw;
   String real;
   String acc;
-
-  Result( double raw, double real, double acc ){
+  Result( double real, double acc, double raw ){
     this.real = String.format("%3.2f", real ) ;
     this.acc =  String.format("%3.2f%%",acc*100) ;
     this.raw =  String.format("%3.2f", raw ) ;
+    if( (real) < 40 ){
+      elements.add( new Label(width/2, height/2-300, 25, "You did okay...\nbetter luck next time!") );
+      elements.add( new Animation(width/2-250, height/2-200, sad) );
+    }
+    else if( (real) < 80 ){
+      elements.add( new Label(width/2, height/2-300, 25, "You are average!\nTry again to increase your score.") );
+      elements.add( new Animation(width/2-250, height/2-200, bongo) );
+    }
+    else{
+      elements.add( new Label(width/2, height/2-300, 25, "You are pretty good at typing!\n Do you touch grass?") );
+      elements.add( new Animation(width/2-250, height/2-200, bongo) );
+    }
   }
-
   void setup(){
     //HOME PAGE BUTTON
     elements.add(
-      new Button( width/2, height/2+250, 55, "Bongo!", 190, 100, new Home() )
+      new Button( width/2, height/2+250, 18, "Bongo!", 100, 30, new Home() )
     );
+
+    elements.add( new Label( width/2, height/2+320, 30, "RealWPM: " + real + "     Accuracy:" + acc + "     RawWPM: " + raw) );
+
   }
 
 }

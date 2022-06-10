@@ -42,6 +42,9 @@ class Button extends Label{
     //render the label
     super.draw();
   }
+  void changeText(String other){
+    text = other;
+  }
 }
 
 //for user input
